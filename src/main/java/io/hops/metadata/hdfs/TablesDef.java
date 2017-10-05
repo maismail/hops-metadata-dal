@@ -280,6 +280,7 @@ public class TablesDef {
     String INODE_PARENT_ID = "inode_parent_id";
     String INODE_NAME = "inode_name";
     String OPERATION = "operation";
+    String TIMESTAMP = "timestamp";
   }
 
 
