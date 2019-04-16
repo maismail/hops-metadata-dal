@@ -411,4 +411,12 @@ public class TablesDef {
     String START_TIME = "start_time";
     String NUM_BLOCKS = "num_blocks";
   }
+  
+  public interface XAttrTableDef {
+    String TABLE_NAME = "hdfs_xattr";
+    String INODE_ID = "inode_id";
+    String NAMESPACE = "namespace";
+    String NAME = "name";
+    String VALUE = "value";
+  }
 }
