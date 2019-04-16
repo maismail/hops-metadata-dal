@@ -17,6 +17,7 @@
  */
 package io.hops.metadata.hdfs.entity;
 
+import com.google.common.base.Charsets;
 import io.hops.metadata.common.FinderType;
 
 import java.util.Objects;
@@ -25,6 +26,7 @@ public final class StoredXAttr {
   
   public enum Finder implements FinderType<StoredXAttr> {
     ByPrimaryKey,
+    ByPrimaryKeyBatch,
     ByInodeId;
     
     @Override
@@ -37,6 +39,8 @@ public final class StoredXAttr {
       switch (this){
         case ByPrimaryKey:
           return Annotation.PrimaryKey;
+        case ByPrimaryKeyBatch:
+          return Annotation.Batched;
         case ByInodeId:
           return Annotation.PrunedIndexScan;
         default:
@@ -86,6 +90,15 @@ public final class StoredXAttr {
     public int hashCode() {
       return Objects.hash(inodeId, namespace, name);
     }
+  
+    @Override
+    public String toString() {
+      return "PrimaryKey{" +
+          "inodeId=" + inodeId +
+          ", namespace=" + namespace +
+          ", name='" + name + '\'' +
+          '}';
+    }
   }
   
   private final PrimaryKey primaryKey;
@@ -94,6 +107,10 @@ public final class StoredXAttr {
   public StoredXAttr(long inodeId, byte namespace, String name, String value) {
     this.primaryKey = new PrimaryKey(inodeId, namespace, name);
     this.value = value;
+  }
+  
+  public StoredXAttr(long inodeId, byte namespace, String name, byte[] value) {
+    this(inodeId, namespace, name, getXAttrString(value));
   }
   
   public long getInodeId() {
@@ -114,6 +131,22 @@ public final class StoredXAttr {
   
   public PrimaryKey getPrimaryKey(){
     return primaryKey;
+  }
+  
+  public byte[] getValueBytes(){
+    return getXAttrBytes(value);
+  }
+  
+  public final static byte[] getXAttrBytes(String val){
+    if(val == null)
+      return null;
+    return val.getBytes(Charsets.UTF_8);
+  }
+  
+  public final static String getXAttrString(byte[] val){
+    if(val == null)
+      return null;
+    return new String(val,Charsets.UTF_8);
   }
   
   @Override
