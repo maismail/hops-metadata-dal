@@ -413,7 +413,7 @@ public class TablesDef {
   }
   
   public interface XAttrTableDef {
-    String TABLE_NAME = "hdfs_xattr";
+    String TABLE_NAME = "hdfs_xattrs";
     String INODE_ID = "inode_id";
     String NAMESPACE = "namespace";
     String NAME = "name";

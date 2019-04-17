@@ -166,4 +166,12 @@ public final class StoredXAttr {
   public int hashCode() {
     return Objects.hash(primaryKey, getValue());
   }
+  
+  @Override
+  public String toString() {
+    return "StoredXAttr{" +
+        "primaryKey=" + primaryKey +
+        ", value='" + value + '\'' +
+        '}';
+  }
 }
