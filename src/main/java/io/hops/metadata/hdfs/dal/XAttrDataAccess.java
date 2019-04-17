@@ -27,6 +27,7 @@ public interface XAttrDataAccess<T, P> extends EntityDataAccess {
   
   List<T> getXAttrsByPrimaryKeyBatch(List<P> pks) throws StorageException;
   Collection<T>  getXAttrsByInodeId(long inodeId) throws StorageException;
+  int removeXAttrsByInodeId(long inodeId) throws StorageException;
   void prepare(Collection<T> removed, Collection<T> newed,
       Collection<T> modified) throws StorageException;
 }
