@@ -24,6 +24,7 @@ import java.util.Objects;
 
 public final class StoredXAttr {
   
+  public static final int MAX_NUM_XATTRS_PER_INODE = 255;
   public static final int MAX_XATTR_NAME_SIZE = 255;
   public static final int MAX_XATTR_VALUE_SIZE = 13730;
   
