@@ -29,7 +29,10 @@ public class MetadataLogEntry {
     DELETE,
     UPDATE,
     RENAME,
-    CHANGEDATASET
+    CHANGEDATASET,
+    ADDXATTR,
+    UPDATEXATTR,
+    DELETEXATRR
   }
 
   public MetadataLogEntry(long datasetId, long inodeId, long inodePartitionId,
