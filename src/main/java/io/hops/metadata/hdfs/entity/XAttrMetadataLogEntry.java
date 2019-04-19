@@ -19,13 +19,13 @@ package io.hops.metadata.hdfs.entity;
 
 public final class XAttrMetadataLogEntry extends MetadataLogEntry{
   
-  public enum XAttrOperation implements OperationBase {
+  public enum Operation implements OperationBase {
     Add((short) 10),
     Update((short) 11),
     Delete((short) 12);
   
     private final short opId;
-    XAttrOperation(short opId) {
+    Operation(short opId) {
       this.opId = opId;
     }
   
@@ -34,8 +34,8 @@ public final class XAttrMetadataLogEntry extends MetadataLogEntry{
       return opId;
     }
   
-    static XAttrOperation valueOf(short id) {
-      for(XAttrOperation op : XAttrOperation.values()){
+    static Operation valueOf(short id) {
+      for(Operation op : Operation.values()){
         if(op.getId() == id){
           return op;
         }
@@ -44,15 +44,15 @@ public final class XAttrMetadataLogEntry extends MetadataLogEntry{
     }
   }
   
-  private final XAttrOperation operation;
+  private final Operation operation;
   public XAttrMetadataLogEntry(MetadataLogEntry entry){
     this(entry.getDatasetId(), entry.getInodeId(), entry.getLogicalTime(),
         (byte)entry.getPk2(), entry.getPk3(),
-        XAttrOperation.valueOf(entry.getOperationId()));
+        Operation.valueOf(entry.getOperationId()));
   }
   
   public XAttrMetadataLogEntry(long datasetId, long inodeId,
-      int logicalTime, byte namespace, String name, XAttrOperation operation) {
+      int logicalTime, byte namespace, String name, Operation operation) {
     super(datasetId, inodeId, logicalTime, inodeId, namespace, name,
         operation.getId());
     this.operation = operation;
@@ -66,11 +66,11 @@ public final class XAttrMetadataLogEntry extends MetadataLogEntry{
     return getPk3();
   }
   
-  public XAttrOperation getOperation(){
+  public Operation getOperation(){
     return operation;
   }
   
   public static boolean isValidOperation(short operationId) {
-    return XAttrOperation.valueOf(operationId) != null;
+    return Operation.valueOf(operationId) != null;
   }
 }

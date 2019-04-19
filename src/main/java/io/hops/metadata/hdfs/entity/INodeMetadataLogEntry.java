@@ -19,7 +19,7 @@ package io.hops.metadata.hdfs.entity;
 
 public final class INodeMetadataLogEntry extends MetadataLogEntry{
   
-  public enum INodeOperation implements OperationBase{
+  public enum Operation implements OperationBase{
     Add((short)0),
     Delete((short)1),
     Update((short)2),
@@ -27,7 +27,7 @@ public final class INodeMetadataLogEntry extends MetadataLogEntry{
     ChangeDataset((short)4);
     
     private final short opId;
-    INodeOperation(short opId){
+    Operation(short opId){
       this.opId = opId;
     }
     @Override
@@ -35,8 +35,8 @@ public final class INodeMetadataLogEntry extends MetadataLogEntry{
       return opId;
     }
     
-    static INodeOperation valueOf(short id) {
-      for(INodeOperation op : INodeOperation.values()){
+    static Operation valueOf(short id) {
+      for(Operation op : Operation.values()){
         if(op.getId() == id){
           return op;
         }
@@ -45,17 +45,17 @@ public final class INodeMetadataLogEntry extends MetadataLogEntry{
     }
   }
   
-  private final INodeOperation operation;
+  private final Operation operation;
   
   public INodeMetadataLogEntry(MetadataLogEntry entry){
     this(entry.getDatasetId(), entry.getInodeId(), entry.getPk1(),
         entry.getPk2(), entry.getPk3(), entry.getLogicalTime(),
-        INodeOperation.valueOf(entry.getOperationId()));
+        Operation.valueOf(entry.getOperationId()));
   }
   
   public INodeMetadataLogEntry(long datasetId, long inodeId,
       long inodePartitionId, long inodeParentId, String inodeName,
-      int logicalTime, INodeOperation operation) {
+      int logicalTime, Operation operation) {
     super(datasetId, inodeId, logicalTime, inodePartitionId, inodeParentId,
         inodeName, operation.getId());
     this.operation = operation;
@@ -73,11 +73,11 @@ public final class INodeMetadataLogEntry extends MetadataLogEntry{
     return getPk3();
   }
   
-  public INodeOperation getOperation(){
+  public Operation getOperation(){
     return operation;
   }
   
   public static boolean isValidOperation(short operationId) {
-    return INodeOperation.valueOf(operationId) != null;
+    return Operation.valueOf(operationId) != null;
   }
 }
