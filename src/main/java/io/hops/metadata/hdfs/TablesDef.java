@@ -306,9 +306,9 @@ public class TablesDef {
     String DATASET_ID = "dataset_id";
     String INODE_ID = "inode_id";
     String Logical_TIME = "logical_time";
-    String INODE_PARTITION_ID = "inode_partition_id";
-    String INODE_PARENT_ID = "inode_parent_id";
-    String INODE_NAME = "inode_name";
+    String PK1 = "pk1";
+    String PK2 = "pk2";
+    String PK3 = "pk3";
     String OPERATION = "operation";
   }
 
