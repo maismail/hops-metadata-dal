@@ -19,7 +19,7 @@ import io.hops.exception.UnknownMetadataOperationType;
 
 public class MetadataLogEntry {
   
-  protected interface OperationBase{
+  public interface OperationBase{
     short getId();
   }
   

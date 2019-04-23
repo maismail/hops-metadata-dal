@@ -21,8 +21,9 @@ public final class XAttrMetadataLogEntry extends MetadataLogEntry{
   
   public enum Operation implements OperationBase {
     Add((short) 10),
-    Update((short) 11),
-    Delete((short) 12);
+    AddAll((short) 11),
+    Update((short) 12),
+    Delete((short) 13);
   
     private final short opId;
     Operation(short opId) {
@@ -56,6 +57,13 @@ public final class XAttrMetadataLogEntry extends MetadataLogEntry{
     super(datasetId, inodeId, logicalTime, inodeId, namespace, name,
         operation.getId());
     this.operation = operation;
+  }
+  
+  public XAttrMetadataLogEntry(long datasetId, long inodeId,
+      int logicalTime) {
+    super(datasetId, inodeId, logicalTime, -1, -1, "-1",
+        Operation.AddAll.getId());
+    this.operation = Operation.AddAll;
   }
   
   public byte getNamespace(){
